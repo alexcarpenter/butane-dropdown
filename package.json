@@ -10,7 +10,8 @@
     "dev": "rollup -c -w",
     "lint": "eslint src",
     "test": "node test/test.js",
-    "precommit": "npm run lint"
+    "copy": "cp ./dist/butane-dropdown.umd.js docs/butane-dropdown.umd.js",
+    "precommit": "npm run lint && npm run copy"
   },
   "devDependencies": {
     "babel": "^6.23.0",
