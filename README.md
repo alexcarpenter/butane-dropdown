@@ -9,7 +9,7 @@
 Install Butane Dropdown, and add it to your `package.json` dev dependencies.
 
 ```
-$ npm install butane-dropdown --save
+$ npm install butane-dropdown --save-dev
 ```
 
 Then `import` it into the file where you'll use it.
