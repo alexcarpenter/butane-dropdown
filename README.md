@@ -24,3 +24,6 @@ import ButaneDropdown from 'butane-dropdown'
 const dropdown = new ButaneDropdown('.js-dropdown')
 ```
 
+## License
+
+[MIT](https://opensource.org/licenses/MIT). © 2017 Alex Carpenter
