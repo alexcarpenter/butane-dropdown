@@ -100,6 +100,7 @@ var ButaneDropdown = function () {
     this._bindKeyPress = this.bindKeyPress.bind(this);
 
     this.buttonElement.addEventListener('click', this._toggleDropdown);
+    this.menuWrapper.addEventListener('keydown', this._bindKeyPress);
   }
 
   createClass(ButaneDropdown, [{
@@ -115,9 +116,9 @@ var ButaneDropdown = function () {
       this.menuWrapper.classList.add(this.options.menuActiveClass);
       this.menuItemFirst.focus();
 
-      this.buttonElement.addEventListener('click', this._hideDropdown);
-      this.buttonElement.removeEventListener('click', this._showDropdown);
-      document.addEventListener('keydown', this._bindKeyPress);
+      // this.buttonElement.addEventListener('click', this._hideDropdown)
+      // this.buttonElement.removeEventListener('click', this._showDropdown)
+      // document.addEventListener('keydown', this._bindKeyPress)
     }
   }, {
     key: 'hideDropdown',
@@ -127,9 +128,9 @@ var ButaneDropdown = function () {
       this.menuWrapper.classList.remove(this.options.menuActiveClass);
       this.buttonElement.focus();
 
-      this.buttonElement.removeEventListener('click', this._hideDropdown);
-      this.buttonElement.addEventListener('click', this._showDropdown);
-      document.removeEventListener('keydown', this._bindKeyPress);
+      // this.buttonElement.removeEventListener('click', this._hideDropdown)
+      // this.buttonElement.addEventListener('click', this._showDropdown)
+      // document.removeEventListener('keydown', this._bindKeyPress)
     }
   }, {
     key: 'bindKeyPress',

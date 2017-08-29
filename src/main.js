@@ -62,6 +62,7 @@ class ButaneDropdown {
     this._bindKeyPress = this.bindKeyPress.bind(this)
 
     this.buttonElement.addEventListener('click', this._toggleDropdown)
+    this.menuWrapper.addEventListener('keydown', this._bindKeyPress)
   }
 
   toggleDropdown () {
@@ -73,10 +74,6 @@ class ButaneDropdown {
     this.buttonElement.setAttribute('aria-expanded', true)
     this.menuWrapper.classList.add(this.options.menuActiveClass)
     this.menuItemFirst.focus()
-
-    this.buttonElement.addEventListener('click', this._hideDropdown)
-    this.buttonElement.removeEventListener('click', this._showDropdown)
-    document.addEventListener('keydown', this._bindKeyPress)
   }
 
   hideDropdown () {
@@ -84,10 +81,6 @@ class ButaneDropdown {
     this.buttonElement.setAttribute('aria-expanded', false)
     this.menuWrapper.classList.remove(this.options.menuActiveClass)
     this.buttonElement.focus()
-
-    this.buttonElement.removeEventListener('click', this._hideDropdown)
-    this.buttonElement.addEventListener('click', this._showDropdown)
-    document.removeEventListener('keydown', this._bindKeyPress)
   }
 
   bindKeyPress (e) {
