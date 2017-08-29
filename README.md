@@ -1,6 +1,6 @@
 # Butane Dropdown
 
-[![butane-dropdown on NPM](https://img.shields.io/npm/v/layzr.js.svg?style=flat-square)](https://www.npmjs.com/package/butane-dropdown) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
+[![butane-dropdown on NPM](https://img.shields.io/npm/v/butane-dropdown.svg?style=flat-square)](https://www.npmjs.com/package/butane-dropdown) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 
 > A modern accessible dropdown library.
 
