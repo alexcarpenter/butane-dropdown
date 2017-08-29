@@ -24,6 +24,23 @@ import ButaneDropdown from 'butane-dropdown'
 const dropdown = new ButaneDropdown('.js-dropdown')
 ```
 
+## Expected DOM structure
+
+```html
+<div class="c-dropdown">
+  <button class="js-dropdown-1 c-dropdown__toggle" aria-controls="dropdown-menu">
+    Example Menu
+    <span aria-hidden="true">&#x25be;</span>
+  </button>
+  <div class="c-dropdown__menu" id="dropdown-menu">
+    <button class="c-dropdown__menu-item">Menu Item 1</button>
+    <button class="c-dropdown__menu-item">Menu Item 2</button>
+    <button class="c-dropdown__menu-item">Menu Item 3</button>
+    <button class="c-dropdown__menu-item">Menu Item 4</button>
+  </div>
+</div>
+```
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT). © 2017 Alex Carpenter
