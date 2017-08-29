@@ -37,7 +37,7 @@ const dropdown = new ButaneDropdown('.js-dropdown', {
 
 ```html
 <div class="c-dropdown">
-  <button class="js-dropdown-1 c-dropdown__toggle" aria-controls="dropdown-menu">
+  <button class="js-dropdown c-dropdown__toggle" aria-controls="dropdown-menu">
     Example Menu
     <span aria-hidden="true">&#x25be;</span>
   </button>
