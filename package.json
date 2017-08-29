@@ -10,8 +10,7 @@
     "dev": "rollup -c -w",
     "lint": "eslint src",
     "test": "node test/test.js",
-    "copy": "cp ./dist/butane-dropdown.umd.js example/butane-dropdown.umd.js",
-    "deploy": "git subtree push --prefix example origin gh-pages",
+    "copy": "cp ./dist/butane-dropdown.umd.js docs/butane-dropdown.umd.js",
     "precommit": "npm run lint && npm run copy"
   },
   "devDependencies": {
