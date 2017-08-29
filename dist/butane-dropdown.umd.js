@@ -98,8 +98,8 @@ var ButaneDropdown = function () {
   createClass(ButaneDropdown, [{
     key: 'toggleDropdown',
     value: function toggleDropdown() {
-      var menuShown = this.buttonElement.getAttribute('aria-expanded') === 'true';
-      return menuShown ? this._hideDropdown() : this._showDropdown();
+      // const menuShown = this.buttonElement.getAttribute('aria-expanded') === 'true'
+      return this.menu.hidden ? this._showDropdown() : this._hideDropdown();
     }
   }, {
     key: 'showDropdown',
