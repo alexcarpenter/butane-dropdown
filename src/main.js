@@ -3,7 +3,7 @@
 import { keyCodes } from './utils'
 
 class ButaneDropdown {
-  constructor (element) {
+  constructor (element, options = {}) {
     if (!element) {
       throw new Error(`Element reference is required.`)
     }
@@ -13,6 +13,12 @@ class ButaneDropdown {
     if (!this.buttonElement) {
       throw new Error(`Element not found.`)
     }
+
+    this.options = {
+      menuActiveClass: options.menuActiveClass ? options.menuActiveClass : 'is-active'
+    }
+
+    this.menuWrapper = this.buttonElement.parentNode
 
     // Set the initial button aria values
     this.buttonElement.setAttribute('aria-haspopup', true)
@@ -66,7 +72,7 @@ class ButaneDropdown {
   showDropdown () {
     this.menu.hidden = false
     this.buttonElement.setAttribute('aria-expanded', true)
-
+    this.menuWrapper.classList.add(this.options.menuActiveClass)
     this.menuItemFirst.focus()
 
     this.buttonElement.addEventListener('click', this._hideDropdown)
@@ -77,7 +83,7 @@ class ButaneDropdown {
   hideDropdown () {
     this.menu.hidden = true
     this.buttonElement.setAttribute('aria-expanded', false)
-
+    this.menuWrapper.classList.remove(this.options.menuActiveClass)
     this.buttonElement.focus()
 
     this.buttonElement.removeEventListener('click', this._hideDropdown)

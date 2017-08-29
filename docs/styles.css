@@ -16,6 +16,10 @@
   cursor: pointer;
 }
 
+.c-dropdown--isActive .c-dropdown__toggle {
+  background-color: #f12e2e;
+}
+
 .c-dropdown__menu {}
 
 .c-dropdown__menu-item {

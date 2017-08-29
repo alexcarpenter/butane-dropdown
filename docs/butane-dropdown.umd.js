@@ -39,6 +39,7 @@ var createClass = function () {
 
 var ButaneDropdown = function () {
   function ButaneDropdown(element) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     classCallCheck(this, ButaneDropdown);
 
     if (!element) {
@@ -50,6 +51,12 @@ var ButaneDropdown = function () {
     if (!this.buttonElement) {
       throw new Error('Element not found.');
     }
+
+    this.options = {
+      menuActiveClass: options.menuActiveClass ? options.menuActiveClass : 'is-active'
+    };
+
+    this.menuWrapper = this.buttonElement.parentNode;
 
     // Set the initial button aria values
     this.buttonElement.setAttribute('aria-haspopup', true);
@@ -106,7 +113,7 @@ var ButaneDropdown = function () {
     value: function showDropdown() {
       this.menu.hidden = false;
       this.buttonElement.setAttribute('aria-expanded', true);
-
+      this.menuWrapper.classList.add(this.options.menuActiveClass);
       this.menuItemFirst.focus();
 
       this.buttonElement.addEventListener('click', this._hideDropdown);
@@ -118,7 +125,7 @@ var ButaneDropdown = function () {
     value: function hideDropdown() {
       this.menu.hidden = true;
       this.buttonElement.setAttribute('aria-expanded', false);
-
+      this.menuWrapper.classList.remove(this.options.menuActiveClass);
       this.buttonElement.focus();
 
       this.buttonElement.removeEventListener('click', this._hideDropdown);

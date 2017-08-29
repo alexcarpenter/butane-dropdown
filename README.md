@@ -21,7 +21,16 @@ import ButaneDropdown from 'butane-dropdown'
 ## Instantiate
 
 ```es6
+
+// using the default options
+
 const dropdown = new ButaneDropdown('.js-dropdown')
+
+// using custom options
+
+const dropdown = new ButaneDropdown('.js-dropdown', {
+  // ...
+})
 ```
 
 ## Expected DOM structure
