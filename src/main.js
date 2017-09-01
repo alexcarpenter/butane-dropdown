@@ -1,31 +1,25 @@
-'use strict'
-
 import { keyCodes } from './utils'
 
 class ButaneDropdown {
-  constructor (element, options = {}) {
+  constructor (element) {
     if (!element) {
       throw new Error(`Element reference is required.`)
     }
 
-    this.buttonElement = document.querySelector(element)
+    this.dropdown = element
+    this.dropdownButton = this.dropdown.querySelector('[data-butane-dropdown-controls]')
+    this.dropdownMenuId = this.dropdownButton.getAttribute('data-butane-dropdown-controls')
 
-    if (!this.buttonElement) {
-      throw new Error(`Element not found.`)
+    if (!this.dropdownButton) {
+      throw new Error('No dropdown button found.')
     }
-
-    this.options = {
-      menuActiveClass: options.menuActiveClass ? options.menuActiveClass : 'is-active'
-    }
-
-    this.menuWrapper = this.buttonElement.parentNode
 
     // Set the initial button aria values
-    this.buttonElement.setAttribute('aria-haspopup', true)
-    this.buttonElement.setAttribute('aria-expanded', false)
+    this.dropdownButton.setAttribute('aria-haspopup', true)
+    this.dropdownButton.setAttribute('aria-expanded', false)
+    this.dropdownButton.setAttribute('aria-controls', this.dropdownMenuId)
 
-    this.menuId = this.buttonElement.getAttribute('aria-controls')
-    this.menu = document.getElementById(this.menuId)
+    this.menu = this.dropdown.querySelector(`#${this.dropdownMenuId}`)
 
     // If the menu doesn't exist, exit with
     // an error referencing the missing menu's id
@@ -61,8 +55,8 @@ class ButaneDropdown {
     this._hideDropdown = this.hideDropdown.bind(this)
     this._bindKeyPress = this.bindKeyPress.bind(this)
 
-    this.buttonElement.addEventListener('click', this._toggleDropdown)
-    this.menuWrapper.addEventListener('keydown', this._bindKeyPress)
+    this.dropdownButton.addEventListener('click', this._toggleDropdown)
+    this.dropdown.addEventListener('keydown', this._bindKeyPress)
   }
 
   toggleDropdown () {
@@ -70,17 +64,17 @@ class ButaneDropdown {
   }
 
   showDropdown () {
+    this.dropdown.classList.add('is-active')
+    this.dropdownButton.setAttribute('aria-expanded', true)
     this.menu.hidden = false
-    this.buttonElement.setAttribute('aria-expanded', true)
-    this.menuWrapper.classList.add(this.options.menuActiveClass)
     this.menuItemFirst.focus()
   }
 
   hideDropdown () {
+    this.dropdown.classList.remove('is-active')
+    this.dropdownButton.setAttribute('aria-expanded', false)
     this.menu.hidden = true
-    this.buttonElement.setAttribute('aria-expanded', false)
-    this.menuWrapper.classList.remove(this.options.menuActiveClass)
-    this.buttonElement.focus()
+    this.dropdownButton.focus()
   }
 
   bindKeyPress (e) {
@@ -109,4 +103,11 @@ class ButaneDropdown {
   }
 }
 
-export default ButaneDropdown
+const init = () => {
+  const butaneDropdowns = document.querySelectorAll('[data-butane-dropdown]')
+  butaneDropdowns.forEach(dropdown => {
+    new ButaneDropdown(dropdown)
+  })
+}
+
+export default { init }

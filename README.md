@@ -21,31 +21,23 @@ import ButaneDropdown from 'butane-dropdown'
 ## Instantiate
 
 ```es6
-
-// using the default options
-
-const dropdown = new ButaneDropdown('.js-dropdown')
-
-// using custom options
-
-const dropdown = new ButaneDropdown('.js-dropdown', {
-  // ...
-})
+ButaneDropdown.init()
 ```
 
 ## Expected DOM structure
 
+Below is the minimum required elements and attributes needed. An additional styling layer is also required to show/hide tab panels via the `hidden` attribute. There are some basic example styles within docs/styles.css for reference.
+
 ```html
-<div class="c-dropdown">
-  <button class="js-dropdown c-dropdown__toggle" aria-controls="dropdown-menu">
+<div data-butane-dropdown>
+  <button data-butane-dropdown-controls="dropdown-menu">
     Example Menu
-    <span aria-hidden="true">&#x25be;</span>
   </button>
-  <div class="c-dropdown__menu" id="dropdown-menu">
-    <button class="c-dropdown__menu-item">Menu Item 1</button>
-    <button class="c-dropdown__menu-item">Menu Item 2</button>
-    <button class="c-dropdown__menu-item">Menu Item 3</button>
-    <button class="c-dropdown__menu-item">Menu Item 4</button>
+  <div id="dropdown-menu">
+    <button>Menu Item 1</button>
+    <button>Menu Item 2</button>
+    <button>Menu Item 3</button>
+    <button>Menu Item 4</button>
   </div>
 </div>
 ```

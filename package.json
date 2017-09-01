@@ -1,12 +1,12 @@
 {
   "name": "butane-dropdown",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "An accessible dropdown menu library",
   "main": "dist/butane-dropdown.cjs.js",
   "module": "dist/butane-dropdown.esm.js",
   "browser": "dist/butane-dropdown.umd.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && npm run copy",
     "dev": "rollup -c -w",
     "lint": "eslint src",
     "test": "node test/test.js",
