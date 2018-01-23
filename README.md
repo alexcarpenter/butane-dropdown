@@ -1,6 +1,4 @@
-# butane-dropdown
-
-[![butane-dropdown on NPM](https://img.shields.io/npm/v/butane-dropdown.svg?style=flat-square)](https://www.npmjs.com/package/butane-dropdown) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
+# butane-dropdown [![butane-dropdown on NPM](https://img.shields.io/npm/v/butane-dropdown.svg?style=flat-square)](https://www.npmjs.com/package/butane-dropdown) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 
 > A modern accessible dropdown library.
 
@@ -30,18 +28,22 @@ Below is the minimum required elements and attributes needed. An additional styl
 
 ```html
 <div data-butane-dropdown>
-  <button data-butane-dropdown-controls="dropdown-menu">
+  <button aria-controls="dropdown-menu" aria-haspopup="true" aria-expanded="false">
     Example Menu
   </button>
-  <div id="dropdown-menu">
-    <button>Menu Item 1</button>
-    <button>Menu Item 2</button>
-    <button>Menu Item 3</button>
-    <button>Menu Item 4</button>
+  <div id="dropdown-menu" role="menu">
+    <button role="menuitem">Menu Item 1</button>
+    <button role="menuitem">Menu Item 2</button>
+    <button role="menuitem">Menu Item 3</button>
+    <button role="menuitem">Menu Item 4</button>
   </div>
 </div>
 ```
 
+## Acknowledgements
+
+This project has been heavily influenced by the work of Heydon Pickerings [inclusive-menu-button](https://github.com/Heydon/inclusive-menu-button) and Indrashish Ghoshs [micromodal](https://github.com/ghosh/micromodal). 👏🏻
+
 ## License
 
-[MIT](https://opensource.org/licenses/MIT). © 2017 Alex Carpenter
+[MIT](https://opensource.org/licenses/MIT). © 2018 Alex Carpenter

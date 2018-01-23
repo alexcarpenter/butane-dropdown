@@ -1,17 +1,15 @@
+/**
+ * @project - butane-dropdown
+ * @author - Alex Carpenter
+ * @build - 1.0.0-alpha.5
+ * @copyright - Copyright (c) 2018, Alex Carpenter
+ */
+
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
 	(global.ButaneDropdown = factory());
 }(this, (function () { 'use strict';
-
-var keyCodes = {
-  esc: 27,
-  tab: 9,
-  upArrow: 38,
-  rightArrow: 39,
-  downArrow: 40,
-  leftArrow: 37
-};
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -38,126 +36,134 @@ var createClass = function () {
 }();
 
 var ButaneDropdown = function () {
-  function ButaneDropdown(element) {
-    classCallCheck(this, ButaneDropdown);
+  'use strict';
 
-    if (!element) {
-      throw new Error('Element reference is required.');
+  var FOCUSABLE_ELEMENTS = ['a[href]', 'input:not([disabled]):not([type="hidden"]):not([aria-hidden])', 'textarea:not([disabled]):not([aria-hidden])', 'button:not([disabled]):not([aria-hidden])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'];
+
+  var KEY_CODES = {
+    esc: 27,
+    tab: 9,
+    upArrow: 38,
+    downArrow: 40
+  };
+
+  var Dropdown = function () {
+    function Dropdown(_ref) {
+      var dropdown = _ref.dropdown,
+          _ref$onHover = _ref.onHover,
+          onHover = _ref$onHover === undefined ? false : _ref$onHover,
+          _ref$debugMode = _ref.debugMode,
+          debugMode = _ref$debugMode === undefined ? false : _ref$debugMode;
+      classCallCheck(this, Dropdown);
+
+      this.config = { debugMode: debugMode };
+      console.log(this.config);
+      // this.shown = false
+      // this.options = options
+      // this.dropdown = dropdown
+      // this.trigger = this.dropdown.querySelector('[aria-controls]')
+      // this.menuId = this.trigger.getAttribute('aria-controls')
+      // this.menu = document.getElementById(this.menuId)
+
+      // this.trigger.addEventListener('click', () => this.toggleDropdown())
+
+      // this.onClick = this.onClick.bind(this)
+      // this.onKeydown = this.onKeydown.bind(this)
     }
 
-    this.dropdown = element;
-    this.dropdownButton = this.dropdown.querySelector('[data-butane-dropdown-controls]');
-    this.dropdownMenuId = this.dropdownButton.getAttribute('data-butane-dropdown-controls');
-
-    if (!this.dropdownButton) {
-      throw new Error('No dropdown button found.');
-    }
-
-    // Set the initial button aria values
-    this.dropdownButton.setAttribute('aria-haspopup', true);
-    this.dropdownButton.setAttribute('aria-expanded', false);
-    this.dropdownButton.setAttribute('aria-controls', this.dropdownMenuId);
-
-    this.menu = this.dropdown.querySelector('#' + this.dropdownMenuId);
-
-    // If the menu doesn't exist, exit with
-    // an error referencing the missing menu's id
-    if (!this.menu) {
-      throw new Error('Element #' + this.menuId + ' not found.');
-    }
-
-    // Set the initial menu aria values
-    this.menu.setAttribute('role', 'menu');
-
-    // Hide the menu
-    this.menu.hidden = true;
-
-    // Collect the menu item buttons
-    this.menuItems = this.menu.querySelectorAll('button');
-
-    if (this.menuItems.length < 1) {
-      throw new Error('The #' + this.menuId + ' menu has no menu items');
-    }
-
-    Array.from(this.menuItems).forEach(function (item) {
-      item.setAttribute('role', 'menuitem');
-    });
-
-    this.menuItemFirst = this.menuItems[0];
-    this.menuItemLast = this.menuItems[this.menuItems.length - 1];
-
-    // Prebind the functions that will be bound in
-    // addEventListener and removeEventListener to
-    // avoid losing references
-    this._toggleDropdown = this.toggleDropdown.bind(this);
-    this._showDropdown = this.showDropdown.bind(this);
-    this._hideDropdown = this.hideDropdown.bind(this);
-    this._bindKeyPress = this.bindKeyPress.bind(this);
-
-    this.dropdownButton.addEventListener('click', this._toggleDropdown);
-    this.dropdown.addEventListener('keydown', this._bindKeyPress);
-  }
-
-  createClass(ButaneDropdown, [{
-    key: 'toggleDropdown',
-    value: function toggleDropdown() {
-      return this.menu.hidden ? this._showDropdown() : this._hideDropdown();
-    }
-  }, {
-    key: 'showDropdown',
-    value: function showDropdown() {
-      this.dropdown.classList.add('is-active');
-      this.dropdownButton.setAttribute('aria-expanded', true);
-      this.menu.hidden = false;
-      this.menuItemFirst.focus();
-    }
-  }, {
-    key: 'hideDropdown',
-    value: function hideDropdown() {
-      this.dropdown.classList.remove('is-active');
-      this.dropdownButton.setAttribute('aria-expanded', false);
-      this.menu.hidden = true;
-      this.dropdownButton.focus();
-    }
-  }, {
-    key: 'bindKeyPress',
-    value: function bindKeyPress(e) {
-      var which = e.which;
-      var target = e.target;
-
-      // Go to previous/next menu items or loop
-      // around to first/last menu item. Close
-      // menu when esc or tab is pressed.
-      switch (which) {
-        case keyCodes.downArrow:
-        case keyCodes.rightArrow:
-          var menuItemLastActive = target === this.menuItemLast;
-          menuItemLastActive ? this.menuItemFirst.focus() : target.nextElementSibling.focus();
-          break;
-        case keyCodes.upArrow:
-        case keyCodes.leftArrow:
-          var menuItemFirstActive = target === this.menuItemFirst;
-          menuItemFirstActive ? this.menuItemLast.focus() : target.previousElementSibling.focus();
-          break;
-        case keyCodes.esc:
-        case keyCodes.tab:
-          this._hideDropdown();
-          break;
+    createClass(Dropdown, [{
+      key: 'addEventListeners',
+      value: function addEventListeners() {
+        this.trigger.addEventListener('click', this.onClick);
+        document.addEventListener('keydown', this.onKeydown);
       }
-    }
-  }]);
-  return ButaneDropdown;
+    }, {
+      key: 'removeEventListeners',
+      value: function removeEventListeners() {
+        this.trigger.removeEventListener('click', this.onClick);
+        document.removeEventListener('keydown', this.onKeydown);
+      }
+    }, {
+      key: 'toggleDropdown',
+      value: function toggleDropdown() {
+        this.shown ? this.hideDropdown() : this.showDropdown();
+      }
+    }, {
+      key: 'showDropdown',
+      value: function showDropdown() {
+        this.activeElement = document.activeElement;
+        this.shown = true;
+        this.addEventListeners();
+        this.trigger.setAttribute('aria-expanded', 'true');
+        this.dropdown.classList.add(this.options.activeClass);
+        this.setFocusToFirstNode();
+      }
+    }, {
+      key: 'hideDropdown',
+      value: function hideDropdown() {
+        this.shown = false;
+        this.removeEventListeners();
+        this.trigger.setAttribute('aria-expanded', 'false');
+        this.dropdown.classList.remove(this.options.activeClass);
+        this.activeElement.focus();
+      }
+    }, {
+      key: 'onClick',
+      value: function onClick(event) {}
+    }, {
+      key: 'onKeydown',
+      value: function onKeydown(event) {
+        if (event.keyCode === KEY_CODES.esc) this.hideDropdown(event);
+        if (event.keyCode === KEY_CODES.tab) this.maintainFocus(event);
+      }
+    }, {
+      key: 'getFocusableNodes',
+      value: function getFocusableNodes() {
+        var nodes = this.dropdown.querySelectorAll(FOCUSABLE_ELEMENTS);
+        return Object.keys(nodes).map(function (key) {
+          return nodes[key];
+        });
+      }
+    }, {
+      key: 'setFocusToFirstNode',
+      value: function setFocusToFirstNode() {
+        var focusableNodes = this.getFocusableNodes();
+        if (focusableNodes.length) focusableNodes[1].focus();
+      }
+    }, {
+      key: 'maintainFocus',
+      value: function maintainFocus(event) {
+        var focusableNodes = this.getFocusableNodes();
+
+        var focusedItemIndex = focusableNodes.indexOf(document.activeElement);
+
+        if (event.shiftKey && focusedItemIndex === 0) {
+          focusableNodes[focusableNodes.length - 1].focus();
+          event.preventDefault();
+        }
+
+        if (!event.shiftKey && focusedItemIndex === focusableNodes.length - 1) {
+          focusableNodes[0].focus();
+          event.preventDefault();
+        }
+      }
+    }]);
+    return Dropdown;
+  }();
+
+  var init = function init(config) {
+    var options = Object.assign({}, { dropdownAttr: 'data-butane-dropdown' }, config);
+
+    // const dropdowns = [...document.querySelectorAll(`[${options.dropdownAttr}]`)]
+
+    dropdowns.forEach(function (dropdown) {
+      new Dropdown(options);
+    });
+  };
+
+  return { init: init };
 }();
 
-var init = function init() {
-  var butaneDropdowns = document.querySelectorAll('[data-butane-dropdown]');
-  butaneDropdowns.forEach(function (dropdown) {
-    new ButaneDropdown(dropdown);
-  });
-};
-
-var main = { init: init };
-
-return main;
+return ButaneDropdown;
 
 })));

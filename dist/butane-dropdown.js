@@ -1,9 +1,3 @@
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global.ButaneDropdown = factory());
-}(this, (function () {
-
 var ButaneDropdown = (function () {
     var FOCUSABLE_ELEMENTS = ['a[href]','input:not([disabled]):not([type="hidden"]):not([aria-hidden])',
         'textarea:not([disabled]):not([aria-hidden])','button:not([disabled]):not([aria-hidden])',
@@ -118,7 +112,5 @@ var ButaneDropdown = (function () {
     };
 })();
 
-return ButaneDropdown;
-
-})));
-//# sourceMappingURL=butane-dropdown.umd.js.map
+module.exports = ButaneDropdown;
+//# sourceMappingURL=butane-dropdown.js.map
