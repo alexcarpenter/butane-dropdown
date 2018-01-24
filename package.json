@@ -1,6 +1,6 @@
 {
   "name": "butane-dropdown",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "An accessible dropdown menu library.",
   "source": "src/index.js",
   "module": "dist/butane-dropdown.es.js",
