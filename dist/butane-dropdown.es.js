@@ -1,7 +1,6 @@
 var ButaneDropdown = (function () {
-    var FOCUSABLE_ELEMENTS = ['a[href]','input:not([disabled]):not([type="hidden"]):not([aria-hidden])',
-        'textarea:not([disabled]):not([aria-hidden])','button:not([disabled]):not([aria-hidden])',
-        'iframe','object','embed','[contenteditable]','[tabindex]:not([tabindex^="-"])'];
+    var FOCUSABLE_ELEMENTS = ['a[href]','button:not([disabled]):not([aria-hidden])',
+        '[tabindex]:not([tabindex^="-"])'];
     var KEY_CODES = {
         esc: 27,
         tab: 9,
